@@ -1,0 +1,26 @@
+{
+  "name": "biglight_challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "node-sass --output-style=expanded --source-map=true --source-map-embed=true sass/ -o css/",
+    "prefix:css": "postcss css/*.css -u autoprefixer --map -d css/",
+    "build": "npm run build:css && npm run prefix:css",
+    "watch": "onchange sass/**/*.scss -- npm run build"
+  },
+  "keywords": [],
+  "author": "Nick Bergquist",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.0.1",
+    "browserslist": "4.14.5",
+    "node-sass": "^5.0.0",
+    "onchange": "^7.1.0",
+    "postcss": "^8.1.8",
+    "postcss-cli": "^8.3.0"
+  },
+  "browserslist": [
+    "last 4 version"
+  ]
+}
