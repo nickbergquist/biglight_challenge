@@ -4,6 +4,12 @@
     Devices     :   Mobile only
 */
 
+
+// var firstResult = document.querySelectorAll("[data-component-type='s-search-result']")[0];
+
+// div.s-main-slot - observe change
+
+
 (function(win) {
 
     win.challenge_02 = {
@@ -14,5 +20,14 @@
         }
     };
 
-    win.challenge_02.init();
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        var mobRender = document.querySelector('html').classList.contains('a-mobile') ? true : false;
+
+        // apply to mobile render only (usually handled in Optimizely, VWO, etc.)
+        if(mobRender) {
+
+            win.challenge_02.init();
+        }
+    });
 })(window);

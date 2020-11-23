@@ -1,17 +1,20 @@
-$challenge-01: #00c200;
+$background-colour: #232f3e;
+$foreground-colour: #fff;
 
-* {
-    color: $challenge-01;
-    text-transform: capitalize;
+.basket-add-quick {
+  background: $background-colour;
+  bottom: 0;
+  display: flex;
+  padding: 15px;
+  position: fixed;
+  width: 100%;
+  z-index: 700;
 }
 
-.thing {
-  display: grid;
-  transition: all .7s;
-  user-select: none;
-  background: linear-gradient(to bottom, white, black); 
-}
-
-h1 {
-  font-style: italic;
+.off-screen { // invisible only
+  height: 1px !important;
+  left: -999em !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  width: 1px !important;
 }
