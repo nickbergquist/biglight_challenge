@@ -37,17 +37,19 @@ $ node index.js
 
 3. And add URLs for resource files being served locally, i.e.  
 
-   + http://localhost:7000/js/challenge-1.js
    + http://localhost:7000/css/challenge-1.css
+   + http://localhost:7000/js/challenge-1.js
 
 4. Repeat for Challenge 2 using a further URL pattern:
    + https://www.amazon.co.uk/s\?k=Amazon
 
 5. And add further resource file paths, i.e.  
 
-   + http://localhost:7000/js/challenge-2.js
    + http://localhost:7000/css/challenge-2.css
+   + http://localhost:7000/js/challenge-2.js
 
+NB.
+In the Code Injector extension ensure that for each Challenge the CSS file is loaded *before* the Javascript file.
 
 
 ## BROWSER RENDER
