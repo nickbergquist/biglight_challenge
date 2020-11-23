@@ -32,9 +32,8 @@
 
             var observer = new MutationObserver(function() {
 
-                console.log('changed');
                 if(!document.querySelector('#promoBlock')) {
-
+                    
                     $_.updateDom();
                 }
             });
@@ -55,6 +54,7 @@
             var eleDest = document.querySelectorAll("[data-component-type='s-search-result']")[0];
             
             if(eleDest) {
+                
                 eleDest.insertAdjacentHTML('afterend', newHtmlFrag);
             }
         }
