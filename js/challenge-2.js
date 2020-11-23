@@ -4,19 +4,59 @@
     Devices     :   Mobile only
 */
 
-
-// var firstResult = document.querySelectorAll("[data-component-type='s-search-result']")[0];
-
-// div.s-main-slot - observe change
-
-
 (function(win) {
 
     win.challenge_02 = {
 
+        config: {
+
+            mutationObserverConfig: {
+                
+                childList: true
+            },
+
+            promoBlockHtml: function() {
+
+                return  '<div id="promoBlock" class="bl-promo-block">' +
+                            '<h2>Get 50% off <br/>all Amazon products</h2>' +
+                            '<p class="bl-offer">Use code: <span class="bl-offer-code">AZ50</span></p>' +
+                            '<p class="bl-terms">T&Cs Apply</p>' +
+                        '</div>';
+            }
+        },
+
         init: function() {
 
-            console.log('<<<<<< CHALLENGE-02 >>>>>>>');
+            var $_ = this;
+            var eleContainer = document.querySelector('.s-main-slot');
+
+            var observer = new MutationObserver(function() {
+
+                console.log('changed');
+                if(!document.querySelector('#promoBlock')) {
+
+                    $_.updateDom();
+                }
+            });
+
+            // initial render
+            $_.updateDom();
+
+            // subsequent renders after container mutation events
+            observer.observe(eleContainer, $_.config.mutationObserverConfig);
+        },
+
+        updateDom: function() {
+
+            var $_ = this;
+            var newHtmlFrag = $_.config.promoBlockHtml();           
+
+            // add test DOM content
+            var eleDest = document.querySelectorAll("[data-component-type='s-search-result']")[0];
+            
+            if(eleDest) {
+                eleDest.insertAdjacentHTML('afterend', newHtmlFrag);
+            }
         }
     };
 

@@ -1,12 +1,30 @@
-$challenge-02: #ffa500;
+$background-colour: #232f3e;
+$foreground-colour: #fff;
+$amazon-orange-colour: #fcbb6a;
 
-* {
-    color: $challenge-02;
+.bl-promo-block {
+    background: $background-colour;
+    border-radius: 4px;
+    color: $foreground-colour;
+    margin: 0 4px .75rem;
+    padding: 1.75rem 60px 1.5rem;
+    text-align: center;
+
+    h2 {
+        font-size: 22px;
+        margin-bottom: 1rem;
+    }
+
+    .bl-offer {
+        font-size: 16px;
+    }
+
+    .bl-terms {
+        font-style: italic;
+        font-size: 11px;
+    }
+
+    .bl-offer-code {
+        color: $amazon-orange-colour;
+    }
 }
-
-.another-thing {
-    display: grid;
-    transition: all .2s;
-    user-select: none;
-    background: linear-gradient(to bottom, white, black); 
-  }
