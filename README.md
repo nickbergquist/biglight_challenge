@@ -76,7 +76,7 @@ This problem can be avoided by using the link provided back to the product displ
 ## WORKAROUNDS
 
 ### Challenge 1:
-On page load there is a section of HTML for the modal quantity selection popup missing from the DOM. This is only generated when the visible pseudo `<select>` element for item quantity is selected but its presence is required so that elements within it can be programmatically controlled by events attached to the fixed-position test element, `#basketAddQuick`  
-Te fix has been to execute a click event to generate the needed markup and to temporarily hide the resulting modal quantity control and its associated background filling the viewport. This approach, though functional, is not ideal and would benefit from peer-review and a second run-through of the code to investigate alternatives.
+On page load there is a section of HTML for the modal quantity selection popup missing from the DOM. This is only generated when the visible pseudo `<select>` element for item quantity is selected but its presence is required so that elements within it can be programmatically controlled by events attached to `#basketAddQuick`, the fixed-position test element.  
+The fix has been to execute a click event to generate the needed markup and to temporarily hide the resulting modal quantity control and its associated background filling the viewport. This approach, though functional, is not ideal and would benefit from peer-review and a second run-through of the code to investigate alternatives.
 
 
