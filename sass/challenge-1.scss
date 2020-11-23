@@ -5,10 +5,15 @@ $foreground-colour: #fff;
   background: $background-colour;
   bottom: 0;
   display: flex;
+  justify-content: space-evenly;
   padding: 15px;
   position: fixed;
   width: 100%;
   z-index: 700;
+
+  .a-button-text.a-declarative {
+    padding-top: 1.5rem;
+  }
 }
 
 .off-screen { // invisible only

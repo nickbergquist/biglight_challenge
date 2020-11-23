@@ -52,6 +52,7 @@
 
                 $_.updateDom();
                 $_.bindEvents();
+                $_.inViewport();
             });
         },
 
@@ -68,63 +69,65 @@
         bindEvents: function() {
 
             var $_ = this;
-            var eleContainer = document.querySelector('#basketAddQuick');  // might need a reference to this for scroll detection
             var btnBasketAdd = document.querySelector('#btnBasketAddQuick');
             var btnBasketQty = document.querySelector('#btnBasketQtyAddQuick');
-            var anchorsModalDropdown = document.querySelectorAll('.a-dropdown-link');
-            // console.log('anchorsModalDropdown.length : ' + anchorsModalDropdown.length);
-            
+            var eleQtyTest = btnBasketQty.querySelector('.a-dropdown-prompt');
 
+            // new Add to Basket button executes the original button functionality
             btnBasketAdd.addEventListener('click', function() {
 
                 document.querySelector('#add-to-cart-button').click();
             }, false);
 
+            // new quantity control - default is 1, subsequent click is 2 and then toggle, as per video example.
             btnBasketQty.addEventListener('click', function() {
 
-                // default is 1, subsequent click is 2 and then toggle, as per video example                
-                
-                
-                // var qtyVals = document.querySelectorAll('.a-dropdown-prompt');
+                var eleQtyOrig = document.querySelector('#mobileQuantitySelection .a-dropdown-prompt');
+                var eleSelectQty = document.querySelector('#mobileQuantityDropDown');
 
-                // qtyVals.forEach(function(ele) {
-                //     if(ele.textContent == '1') {
-                //         ele.textContent = '2';
-                //     }
-                //     else {
-                //         ele.textContent = '1';
-                //     }
-                // });
-
-                // update the <select> value and the original quantity control with the quantity in the test markup
-
+                if(eleQtyTest.textContent == '1') {
+                    eleQtyTest.textContent = '2';
+                    eleQtyOrig.textContent = '2';
+                    document.querySelector('#mobileQuantityDropDown_1').click();
+                    eleSelectQty.value = '2';
+                }
+                else {
+                    eleQtyTest.textContent = '1';
+                    eleQtyOrig.textContent = '1';
+                    document.querySelector('#mobileQuantityDropDown_0').click();
+                    eleSelectQty.value = '1';
+                }
             }, false);
 
             // handle changes to the original quantity control and update the test equivalent
-            anchorsModalDropdown.forEach(function(ele) {
+            document.querySelector('#mobileQuantityDropDown_0').addEventListener('click', function() {
 
-                ele.addEventListener('click', function() {
-
-                    var qty = ele.textContent;
-                    console.log('qty : ', qty);
-
-                    // update the quantity in the test markup
-
-
-                }, false);
+                eleQtyTest.textContent = '1';
             });
 
+            document.querySelector('#mobileQuantityDropDown_1').addEventListener('click', function() {
 
+                eleQtyTest.textContent = '2';
+            });
+        },
 
-            // also need listener for changes to the original quantity control to then update the test one
+        inViewport: function() {
 
-                // get the quantity from #btnBasketQtyAddQuick
-                // update the original <select> - document.querySelector('#mobileQuantityDropDown').value = theValue;
-                // update the pseudo-select element value - #mobileQuantitySelection .a-dropdown-prompt
-                // simulate a click event on the original 'Add to Basket' control
+            var $_ = this;
+            var eleTrigger = document.querySelector('#buyNow_feature_div + #addToCart_feature_div'); // theres more than one #addToCart_feature_div :(
+            var eleBasketAddQuick = document.querySelector('#basketAddQuick');
 
-                // document.querySelector('#mobileQuantityDropDown').click(); // opens the modal selector at specific screen positions
-                // document.querySelector('#mobileQuantityDropDown_1').click(); // or document.querySelector('#mobileQuantityDropDown_0').click();
+            win.addEventListener('scroll', function() {
+
+                if($_.utilities.inView(eleTrigger)) {
+
+                    eleBasketAddQuick.classList.add('off-screen');
+                }
+                else {
+    
+                    eleBasketAddQuick.classList.remove('off-screen');
+                }
+            }, {passive: true});            
         },
         
         utilities: {
@@ -181,6 +184,13 @@
 
                 // Expose 'observeSelector'
                 $_.eleObsSelector = observeSelector;
+            },
+
+            inView: function(ele) {
+
+                var bounds = ele.getBoundingClientRect();
+
+                return (bounds.top >= 0 && bounds.bottom <= (win.innerHeight || document.documentElement.clientHeight));
             }
         }
     };
